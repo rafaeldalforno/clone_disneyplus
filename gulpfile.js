@@ -9,9 +9,14 @@ function styles(){
 }
 
 function images(){
-  return gulp.src('./src/images/**/*')
-    .pipe(imagemin())
-    .pipe(gulp.dest('./dist/images'));
+  return  gulp.src('./src/images/**/*')
+            .pipe(imagemin({
+              optimizationLevel: 5,
+              progressive: true,
+              interlaced: true,
+              svgoPlugins: [{ removeViewBox: false }]
+            }))
+            .pipe(gulp.dest('./dist/images'));
 }
 
 exports.default = gulp.parallel(styles, images);
